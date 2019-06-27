@@ -1,5 +1,4 @@
-export const senators = 
-  [ 
+module.exports = [ 
     { party: 'Republican',
       first_name: 'Lamar',
       last_name: 'Alexander',
@@ -514,3 +513,5 @@ export const senators =
 
 
 // console.log(result)
+
+
