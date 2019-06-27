@@ -22,3 +22,30 @@ app.get('/api/v1/senators', (request, response) => {
     response.status(404).send(error)
   })
 })
+
+app.post('/api/v1/senators', (request, response) => {
+  const senator = request.body;
+
+  for (let requiredParameter of ['party', 'first_name', 'last_name', 'state_name']) {
+    if (!senator[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { title: <String>, author: <String> }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  let newSenator = {
+  	party: senator.party,
+  	first_name: senator.first_name,
+  	last_name: senator.last_name
+  }
+  	database('states').where({name: senator.state_name}).select('id')
+
+  	.then(stateId => database('senators').insert({...newSenator, state_id: stateId[0].id}, "id")
+  	.then(senatorId => {
+      response.status(201).json({ id: senatorId[0] })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    }))
+});
