@@ -8,10 +8,12 @@ const app = express();
 
 app.use(express.json());
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`App is running on ${port}`)
 });
 
+app.get('/', function(req, res, next) {
+ });
 
 app.get('/api/v1/senators', (request, response) => {
   database('senators').select()
