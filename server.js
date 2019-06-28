@@ -59,3 +59,23 @@ app.post('/api/v1/senators', (request, response) => {
       response.status(500).json({ error });
     }))
 });
+
+app.post('/api/v1/states', (request, response) => {
+	const state = request.body;
+
+	for (let requiredParameter of ['name', 'abreviation']) {
+		if(!state[requiredParameter]) {
+			return response
+				.status(422)
+				.send({ error: `Expected format: { title: <String>, author: <String> }. You're missing a "${requiredParameter}" property.`});
+		}
+	}
+
+	database('states').insert(state, 'id')
+		.then(state => {
+			response.status(201).json({id: state[0] })
+		})
+		.catch(error => {
+			response.status(500).json({ error });
+		});
+});
