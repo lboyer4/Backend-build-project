@@ -12,8 +12,8 @@ app.listen(process.env.PORT || port, () => {
   console.log(`App is running on ${port}`)
 });
 
-app.get('/', function(req, res, next) {
-	response.status(200).json('hello')
+app.get('/', function(req, res) {
+	res.status(200).json('hello')
  });
 
 app.get('/api/v1/senators', (request, response) => {
