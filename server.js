@@ -23,6 +23,16 @@ app.get('/api/v1/senators', (request, response) => {
   })
 })
 
+app.get('/api/v1/states', (request, response) => {
+  database('states').select()
+  .then((states) => {
+    response.status(200).json(states);
+  })
+  .catch(error => {
+    response.status(404).send(error)
+  })
+})
+
 app.post('/api/v1/senators', (request, response) => {
   const senator = request.body;
 
