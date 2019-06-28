@@ -3,8 +3,10 @@ const states = require('../states.js')
 
 exports.seed = function(knex) {
   return knex('senators').del()
+
   .then(() => {
-    return knex('states').del();
+    console.log('something')
+    knex('states').del();
   })
   .then(() => {
     return knex('states').insert(states)
@@ -20,74 +22,17 @@ exports.seed = function(knex) {
         })
       )
     })
-  // .then(() => {
-  //   let senatorPromises = [];
-  //   senators.forEach((senator) => {
-  //     let state = senator.state_name;
-  //     senatorPromises.push(createSenator(knex, senator, state));
-  //   });
-
-  //   return Promise.all(senatorPromises);
-  // });
 };
 
-const createSenator = (knex, senator, state) => {
-  return knex('states').where('name', state).first()
-  .then((stateRecord) => {
-    return knex('senators').insert({
-      first_name: senator.first_name,
-      last_name: senator.last_name,
-      party: senator.party,
-      state_id: stateRecord.id
-    });
-  });
-};
-
-
-
-// const createStates = (knex, state) => {
-//   return knex('states').insert({
-//     name: state.name,
-//     abreviation: state.abreviation
-//   }, 'id')
-//   .then(stateId => {
-//     let senatorPromises = [];
-
-//     state.senators.forEach(senator => {
-//       senatorPromises.push(
-//         createSenator(knex, {
-//           first_name: senator.first_name,
-//           last_name: senator.last_name,
-//           party: senator.party,
-//           state_id: stateId[0]
-//         })
-//       )
-//     })
-//     return Promise.all(senatorPromises);
+// const createSenator = (knex, senator, state) => {
+//   return knex('states').where('name', state).first()
+//   .then((stateRecord) => {
+//     return knex('senators').insert({
+//       first_name: senator.first_name,
+//       last_name: senator.last_name,
+//       party: senator.party,
+//       state_id: stateRecord.id
 //     });
-
-//   };
-
-// // const createSenator = (knex, senator) => {
-// //   return knex('senators').insert({
-// //     first_name: senator.first_name,
-// //     last_name: senator.last_name,
-// //     party: senator.party,
-// //     state_id: 
-// // };
-
-// exports.seed = function(knex) {
-//   return knex('senators').del()
-//     .then(() => knex('states').del())
-//     .then(() => {
-//       let statePromises = []
-
-//       sen.forEach(senator => {
-//         statePromises.push(createStates(knex, senator))
-//       });
-
-//       return Promise.all(statePromises)
-//     })
-//   .catch(error => console.log('error happened'))
-      
+//   });
 // };
+
