@@ -46,6 +46,16 @@ app.get('/api/v1/senator/:id', (request, response) => {
   });
 });
 
+app.get('/api/v1/state/:id', (request, response) => {
+  database('states').where('id', request.params.id).select()
+  .then((state) => {
+    response.status(200).json(state);
+  })
+  .catch((error) => {
+    response.status(500).json({ error });
+  });
+});
+
 app.post('/api/v1/senators', (request, response) => {
   const senator = request.body;
 
