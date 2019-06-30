@@ -106,9 +106,9 @@ app.delete('/api/v1/senators/:id', (request, response) => {
 	database('senators').where({ id: request.params.id}).del()
 	.then(()=> {
 		response.status(201).json({success: true})
+	})
 	.catch(error => {
 			response.status(500).json({ error });
 		});
-	})
 
 });
