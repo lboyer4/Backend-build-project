@@ -58,7 +58,6 @@ app.get('/api/v1/state/:id', (request, response) => {
 
 app.post('/api/v1/senators', (request, response) => {
   const senator = request.body;
-
   for (let requiredParameter of ['party', 'first_name', 'last_name', 'state_name']) {
     if (!senator[requiredParameter]) {
       return response
@@ -101,4 +100,15 @@ app.post('/api/v1/states', (request, response) => {
 		.catch(error => {
 			response.status(500).json({ error });
 		});
+});
+
+app.delete('/api/v1/senators/:id', (request, response) => {
+	database('senators').where({ id: request.params.id}).del()
+	.then(()=> {
+		response.json({success: true})
+	})
+  //  database('senators').where('id', request.params.id).del()
+  // // if( id == -1 ) return response.status(404).json('senator not found');
+  // // database('senators').splice(id, 1);
+  //   return response.sendStatus(204);
 });
