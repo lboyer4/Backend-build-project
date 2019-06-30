@@ -105,10 +105,10 @@ app.post('/api/v1/states', (request, response) => {
 app.delete('/api/v1/senators/:id', (request, response) => {
 	database('senators').where({ id: request.params.id}).del()
 	.then(()=> {
-		response.json({success: true})
+		response.status(201).json({success: true})
+	.catch(error => {
+			response.status(500).json({ error });
+		});
 	})
-  //  database('senators').where('id', request.params.id).del()
-  // // if( id == -1 ) return response.status(404).json('senator not found');
-  // // database('senators').splice(id, 1);
-  //   return response.sendStatus(204);
+
 });
