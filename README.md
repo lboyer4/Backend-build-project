@@ -44,9 +44,9 @@ start server with
 -Endpoint: '/api/v1/states'
 -Returns: A new state object
 
-Method: Delete
-Endpoint: '/api/v1/senators/:id'
-Returns: {success: true}
+-Method: Delete
+-Endpoint: '/api/v1/senators/:id'
+-Returns: {success: true}
 
 ## Focus
 
